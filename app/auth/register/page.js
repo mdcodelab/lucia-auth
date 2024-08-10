@@ -1,21 +1,31 @@
-
 "use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { createUser } from "@/app/actions";
 
 function RegisterPage() {
   
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repassword, setRePassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
-  const handleSubmit = async (e)=> {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  }
+    try {
+      // Încearcă să creezi utilizatorul
+      await createUser(name, email, password, rePassword);
+      toast.success("Account created successfully!");
+      // router.push("/auth/login");
+    } catch (error) {
+
+      toast.error(error.message);
+    }
+  };
+
 
   return (
     <div className="w-full items-center justify-center">
@@ -26,7 +36,7 @@ function RegisterPage() {
           <Label htmlFor="name" className="text-xl font-semibold">Name:</Label>
           <input type="text" name="name" className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
-            placeholder="Your name ..." required onChange={(e)=>setName(e.target.value)}></input>
+            placeholder="Your name ..." required value={name} onChange={(e)=>setName(e.target.value)}></input>
         </div>
 
         <div className="w-75 mb-2">
@@ -34,7 +44,7 @@ function RegisterPage() {
           <input type="email" name="email"
             className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
-            placeholder="Your email ..." required onChange={(e)=>setEmail(e.target.value)}></input>
+            placeholder="Your email ..." required value={email} onChange={(e)=>setEmail(e.target.value)}></input>
         </div>
 
         <div className="w-75 mb-2">
@@ -42,7 +52,7 @@ function RegisterPage() {
           <input type="password" name="password"
             className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
-            placeholder="Your password ..." required onChange={(e)=>setPassword(e.target.value)}></input>
+            placeholder="Your password ..." value={password} required onChange={(e)=>setPassword(e.target.value)}></input>
         </div>
 
         <div className="w-75 mb-2">
@@ -50,7 +60,7 @@ function RegisterPage() {
           <input type="password" name="rePassword"
             className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
-            placeholder="Retype password ..." required onChange={(e)=>setRePassword(e.target.value)}></input>
+            placeholder="Retype password ..." value={rePassword} required onChange={(e)=>setRePassword(e.target.value)}></input>
         </div>
 
         <Button type="submit" className="w-full py-2 my-2">Create an account</Button>
