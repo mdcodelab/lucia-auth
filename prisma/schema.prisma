@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -31,3 +31,13 @@ model Session {
 
   user User @relation(fields: [userId], references: [id])
 }
+
+//npx i -D prisma
+//npx prisma init
+//compose schema
+//npx prisma generate (when modify schema)
+//npx prisma db push (sincronize schema)
+//npx prisma migrate dev (create tables on neon)
+//npx peisma studio (sqlite)
+//npx prisma status (verify status)
+
