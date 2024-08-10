@@ -1,5 +1,6 @@
+
+"use client";
 import { Button } from "@/components/ui/button";
-  "ise client";
 import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
 
@@ -8,29 +9,17 @@ function RegisterPage() {
     <div className="w-full items-center justify-center">
       <h1 className="text-center text-3xl font-semibold py-6">Welcome</h1>
       <form className="max-w-[350px] w-full shadow rounded-xl mx-auto">
-        <div className="w-full mb-2">
-          <Label htmlFor="firstName text-2xl" className="text-xl font-semibold">
-            First Name:
-          </Label>
-          <input
-            type="text"
-            name="firstName"
-            className="w-full py-2 shadow 
-            rounded-md bordered border-slate-300 border-2"
-            placeholder="Your first name ..."
-          ></input>
-        </div>
 
         <div className="w-75 mb-2">
-          <Label htmlFor="lastName" className="text-xl font-semibold">
-            Last Name:
+          <Label htmlFor="name" className="text-xl font-semibold">
+            Name:
           </Label>
           <input
             type="text"
-            name="lastName"
+            name="name"
             className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
-            placeholder="Your last name ..."
+            placeholder="Your name ..."
           ></input>
         </div>
 
@@ -48,19 +37,6 @@ function RegisterPage() {
         </div>
 
         <div className="w-75 mb-2">
-          <Label htmlFor="phone" className="text-xl font-semibold">
-            Phone:
-          </Label>
-          <input
-            type="number"
-            name="phone"
-            className="w-full py-2 shadow rounded-md bordered
-            border-slate-300 border-2"
-            placeholder="Your phone ..."
-          ></input>
-        </div>
-
-        <div className="w-75 mb-2">
           <Label htmlFor="password" className="text-xl font-semibold">
             Password:
           </Label>
@@ -70,6 +46,19 @@ function RegisterPage() {
             className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
             placeholder="Your password ..."
+          ></input>
+        </div>
+
+        <div className="w-75 mb-2">
+          <Label htmlFor="rePassword" className="text-xl font-semibold">
+            Retype password:
+          </Label>
+          <input
+            type="password"
+            name="rePassword"
+            className="w-full py-2 shadow rounded-md bordered
+            border-slate-300 border-2"
+            placeholder="Retype password ..."
           ></input>
         </div>
 
