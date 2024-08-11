@@ -4,17 +4,12 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function LoginPage() {
     const [password, setPassword]=useState("");
     const[email, setEmail]=useState("");
-    const handleEmail = (e)=> {
-        setEmail(e.target.value);
-    };
-
-    const handlePassword = (e) => {
-        setPassword(e.target.value);
-    }
+  
 
     const handleSubmit = (e)=> {
         e.preventDefault();
@@ -37,7 +32,7 @@ function LoginPage() {
               name="email"
               className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
-              placeholder="Your email ..." onChange={handleEmail}
+              placeholder="Your email ..." required value={email} onChange={(e)=> setEmail(e.target.value)}
             ></input>
           </div>
 
@@ -50,7 +45,7 @@ function LoginPage() {
               name="password"
               className="w-full py-2 shadow rounded-md bordered
             border-slate-300 border-2"
-              placeholder="Your password ..." omChange={handlePassword}
+              placeholder="Your password ..." value={password} onChange={(e)=> setPassword(e.target.value)}
             ></input>
           </div>
 

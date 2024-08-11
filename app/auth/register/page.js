@@ -16,7 +16,6 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Încearcă să creezi utilizatorul
       await createUser(name, email, password, rePassword);
       toast.success("Account created successfully!");
       // router.push("/auth/login");
