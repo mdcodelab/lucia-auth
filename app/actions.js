@@ -3,6 +3,8 @@ import prisma from "@/db";
 //import bcrypt from "bcrypt";
 import {Argon2id} from "oslo/password";
 import { redirect } from "next/navigation";
+import { lucia } from "./lucia"
+import { cookies } from "next/headers";
 
 
 export const createUser = async (name, email, password, rePassword) => {
@@ -34,6 +36,13 @@ export const createUser = async (name, email, password, rePassword) => {
       hashedPassword: hashedPassword,
     },
   });
+//create session for the user
+  const session = await lucia.createSession(user.id, {});
+  //create the cookie to store the session in the cookie 
+  const sessionCookie = await lucia.createSessionCookie(session.id);
+  //set next.js to make sure that the cookie is sent to the user's browser-give us the 
+  //cookie to validate in http request
+  cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attribute)
 redirect("/profile");
   return user;
 };
