@@ -56,9 +56,21 @@ const user = await prisma.user.findUnique({
 });
 
 if (!user) {
-throw new Error("User with this email does not exists");
+  throw new Error("User with this email does not exists");
 }
 
+const argon2id = new Argon2id();
+const passwordMatch = await argon2id.verify(user.hashedPassword, password);
+if(!passwordMatch) {
+throw new Error ("Invalid password.");
+}
 
+console.log("Password match", passwordMatch);
+
+const session = await lucia.createSession(user.id, {});
+const sessionCookie = await lucia.createSessionCookie(session.id);
+cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attribute);
 redirect("/profile");
+
+
 }

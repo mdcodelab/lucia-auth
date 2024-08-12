@@ -5,14 +5,22 @@ import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { login } from "@/app/actions";
 
 function LoginPage() {
     const [password, setPassword]=useState("");
     const[email, setEmail]=useState("");
   
 
-    const handleSubmit = (e)=> {
+    const handleSubmit = async (e)=> {
         e.preventDefault();
+        try {
+          await login(email, password);
+          toast.success("Logged in successfully!")
+        } catch (error) {
+          console.error("error", error);
+          toast.error(error.message);
+        }
     }
 
 
@@ -22,7 +30,7 @@ function LoginPage() {
         <h1 className="text-center text-3xl font-semibold py-6">
           Welcome Back
         </h1>
-        <form className="max-w-[350px] w-full shadow rounded-xl mx-auto">
+        <form className="max-w-[350px] w-full shadow rounded-xl mx-auto" onSubmit={handleSubmit}>
           <div className="w-75 mb-2">
             <Label htmlFor="email" className="text-xl font-semibold">
               Email:
@@ -50,7 +58,7 @@ function LoginPage() {
           </div>
 
           <Button type="submit" className="w-full py-2 my-2 text-lg">
-            Sign In
+            Login
           </Button>
         </form>
         <div
