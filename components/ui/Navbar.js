@@ -38,7 +38,9 @@ async function Navbar() {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem className="text-center w-[200px]">
-            <Link href="/" className="text-center text-lg">Sign out</Link>
+            <Link href="/" className="text-center text-lg">
+              Sign out
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
