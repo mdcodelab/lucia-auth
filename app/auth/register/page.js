@@ -65,7 +65,7 @@ function RegisterPage() {
 
         <Button type="submit" className="w-full py-2 my-2">Create an account</Button>
       </form>
-      <p className="text-center my-2">Or, login with Google</p>
+      <p className="text-center my-2">Or, continue with Google</p>
         <GoogleOathButton></GoogleOathButton>
       <div
         className="flex mx-auto justify-between bordered border-black mt-2"

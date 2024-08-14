@@ -62,7 +62,7 @@ function LoginPage() {
             Login
           </Button>
         </form>
-        <p className="text-center my-2">Or, login with Google</p>
+        <p className="text-center my-2">Or, continue with Google</p>
         <GoogleOathButton></GoogleOathButton>
         <div
           className="flex mx-auto justify-between bordered border-black mt-2"
