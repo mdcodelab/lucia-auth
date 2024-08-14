@@ -8,6 +8,7 @@ import {
 import { FaUserAstronaut } from "react-icons/fa";
 import { Button } from "./button";
 import { getUser } from "@/app/lucia";
+import SignOutButton from "./SignOutButton";
 
 async function Navbar() {
   const user = await getUser();
@@ -38,9 +39,7 @@ async function Navbar() {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem className="text-center w-[200px]">
-            <Link href="/" className="text-center text-lg">
-              Sign out
-            </Link>
+          <SignOutButton>Sign Out</SignOutButton>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

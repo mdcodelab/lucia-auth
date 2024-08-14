@@ -4,6 +4,7 @@ import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 import prisma from "@/db";
 import {Lucia} from "lucia";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 
 
@@ -72,17 +73,4 @@ export const getUser = async ()=> {
     console.log(currentUser);
     return currentUser;
     }
-
-    export const signOut = async () => {
-  // Preia ID-ul sesiunii din cookies
-  const sessionId = cookies().get(lucia.sessionCookieName)?.value || null;
-  if (sessionId) {
-    // Șterge sesiunea din baza de date
-    await lucia.invalidateSession(sessionId);
-
-    // Creează un cookie gol pentru a înlocui cel existent
-    const sessionCookie = await lucia.createBlankSessionCookie();
-    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attribute);
-  }
-};
 

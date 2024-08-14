@@ -71,6 +71,18 @@ const session = await lucia.createSession(user.id, {});
 const sessionCookie = await lucia.createSessionCookie(session.id);
 cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attribute);
 redirect("/profile");
-
-
 }
+
+    export const signOut = async () => {
+  // Preia ID-ul sesiunii din cookies
+  const sessionId = cookies().get(lucia.sessionCookieName)?.value || null;
+  if (sessionId) {
+    // Șterge sesiunea din baza de date
+    await lucia.invalidateSession(sessionId);
+
+    // Creează un cookie gol pentru a înlocui cel existent
+    const sessionCookie = await lucia.createBlankSessionCookie();
+    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attribute);
+  }
+  return redirect("/");
+};
