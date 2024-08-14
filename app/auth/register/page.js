@@ -5,6 +5,7 @@ import { Label } from "@radix-ui/react-label";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { createUser } from "@/app/actions";
+import GoogleOathButton from "@/components/ui/GoogleOathButton";
 
 function RegisterPage() {
   
@@ -27,7 +28,7 @@ function RegisterPage() {
 
 
   return (
-    <div className="w-full items-center justify-center">
+    <div className="w-[350px] mx-auto items-center justify-center">
       <h1 className="text-center text-3xl font-semibold py-6">Welcome</h1>
       <form className="max-w-[350px] w-full shadow rounded-xl mx-auto" onSubmit={handleSubmit}>
 
@@ -64,6 +65,8 @@ function RegisterPage() {
 
         <Button type="submit" className="w-full py-2 my-2">Create an account</Button>
       </form>
+      <p className="text-center my-2">Or, login with Google</p>
+        <GoogleOathButton></GoogleOathButton>
       <div
         className="flex mx-auto justify-between bordered border-black mt-2"
         style={{ width: "max-content" }}
