@@ -5,6 +5,8 @@ import {Argon2id} from "oslo/password";
 import { redirect } from "next/navigation";
 import { lucia } from "./lucia"
 import { cookies } from "next/headers";
+import { generateCodeVerifier, generateState } from "arctic";
+import {googleAuthClient} from "../lib/googleOath";
 
 
 export const createUser = async (name, email, password, rePassword) => {
@@ -85,4 +87,36 @@ redirect("/profile");
     cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attribute);
   }
   return redirect("/");
+};
+
+
+export const getGoogleOauthConsentUrl = async () => {
+  try {
+    const state = generateState();
+    const codeVerifier = generateCodeVerifier();
+
+    cookies().set("codeVerifier", codeVerifier, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+    cookies().set("state", state, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    const authUrl = await googleAuthClient.createAuthorizationURL(
+      state,
+      codeVerifier,
+      {
+        scopes: ["email", "profile"],
+      }
+    );
+
+    console.log("Generated OAuth URL:", authUrl); // Log pentru depanare
+
+    return { url: authUrl.toString() };
+  } catch (error) {
+    console.error("Error generating OAuth URL:", error); // Log pentru depanare
+    return { error: "Something went wrong" };
+  }
 };
